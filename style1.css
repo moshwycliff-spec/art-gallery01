@@ -1,0 +1,311 @@
+/* --- 1. Variables & Theming --- */
+:root {
+    /* Light Mode (Default) */
+    --bg-color: #f4f4f4;
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --accent-color: #6c63ff; /* Standard Purple */
+    --shadow: 0 4px 6px rgba(0,0,0,0.1);
+    --nav-bg: rgba(255, 255, 255, 0.95);
+}
+
+/* Dark Mode Class (Neon) */
+body.dark-mode {
+    --bg-color: #0a0a0a;
+    --card-bg: #161616;
+    --text-color: #978d8d;
+    --accent-color: #14b2f0; /* Neon Cyan */
+    --shadow: 0 0 15px rgba(0, 243, 255, 0.2); /* Glow Effect */
+    --nav-bg: rgba(10, 10, 10, 0.95);
+}
+
+/* --- 2. Global Resets --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+
+html {
+    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* --- 3. Navigation --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background: var(--nav-bg);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+}
+
+body.dark-mode .navbar {
+    border-bottom: 1px solid var(--accent-color);
+    box-shadow: 0 2px 10px var(--accent-color);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.highlight {
+    color: var(--accent-color);
+    text-shadow: 0 0 5px transparent;
+}
+
+body.dark-mode .highlight {
+    text-shadow: 0 0 10px var(--accent-color); /* Neon text glow */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+/* --- 4. Toggle Switch --- */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-color); /* Button Glow */
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.mode-label {
+    margin-left: 10px;
+    font-size: 0.9rem;
+}
+
+/* --- 5. Hero Section --- */
+.hero {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.btn {
+    padding: 10px 25px;
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: var(--accent-color);
+    color: #fff;
+    box-shadow: 0 0 20px var(--accent-color); /* Hover Glow */
+}
+
+/* --- 6. Gallery & Filters --- */
+.gallery-section {
+    padding: 4rem 5%;
+    text-align: center;
+}
+
+.filters {
+    margin: 2rem 0;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    border: none;
+    background: var(--card-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    margin: 0 5px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    transition: 0.3s;
+    width: 6.5rem;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: var(--accent-color);
+    color: #fff;
+    transform: scale(1.05);
+}
+
+body.dark-mode .filter-btn.active {
+    box-shadow: 0 0 15px var(--accent-color);
+}
+
+/* Grid Layout */
+.art-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.art-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transform: translateY(0);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.art-card:hover {
+    transform: translateY(-10px); /* Lift effect */
+}
+
+.img-container img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+.art-info {
+    padding: 1.5rem;
+}
+
+.art-info:hover {
+    background-color: #978d8d;
+    color: #0a0a0a;
+}
+
+/* Filter Animation Classes */
+.art-card.hide {
+    display: none;
+}
+
+.isa {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+
+.about {
+    padding: 4rem 5%;
+    text-align: center;
+    background-color: var(--card-bg);
+    overflow: scroll;   /* this is to enable scrolling with in the about section*/
+    overflow-x: hidden; /* we are hidding the scroll bar at the x-axis*/
+}
+
+.art-card.show {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* --- 7. Contact & Footer --- */
+.contact {
+    padding: 4rem 5%;
+    text-align: center;
+    background-color: var(--card-bg);
+}
+
+b:hover {
+    text-shadow: 2px 2px 6px grey;
+}
+
+#View {
+    padding-top: 2px;
+}
+
+#mail {
+    width: 10rem;
+}
+
+#link {
+    text-decoration: none;
+}
+
+footer {
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* --- 8. Responsive --- */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Simple hiding for mobile, ideally replace with burger menu */
+    }
+    .hero h1 { font-size: 2rem; }
+}
